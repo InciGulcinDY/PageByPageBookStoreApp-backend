@@ -1,6 +1,6 @@
 package com.inci.Page.by.Page.Book.Store.entities.concretes;
 
-import com.inci.Page.by.Page.Book.Store.entities.abstracts.User;
+import com.inci.Page.by.Page.Book.Store.entities.abstracts.BasicEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,11 +14,13 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @PrimaryKeyJoinColumn(name = "user_id")
-public class Author extends User {
-    @Id
-    @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+public class Author extends BasicEntity {
+
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "surname")
+    private String surname;
 
     @OneToMany(mappedBy = "author")
     private List<Book> books;

@@ -1,5 +1,6 @@
 package com.inci.Page.by.Page.Book.Store.entities.concretes;
 
+import com.inci.Page.by.Page.Book.Store.entities.abstracts.BasicEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,17 +14,13 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Language {
-    @Id
-    @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+public class Language extends BasicEntity {
 
     @Column(name = "language")
     private String language;
 
     @OneToMany(mappedBy = "language")
-    List<Magazine> magazines;
+    private List<Magazine> magazines;
 
     @OneToMany(mappedBy = "language")
     private List<Book> books;

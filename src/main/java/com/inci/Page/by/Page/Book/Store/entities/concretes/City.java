@@ -1,5 +1,6 @@
 package com.inci.Page.by.Page.Book.Store.entities.concretes;
 
+import com.inci.Page.by.Page.Book.Store.entities.abstracts.BasicEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,11 +13,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class City {
-    @Id
-    @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+public class City extends BasicEntity {
 
     @Column(name = "city")
     private String city;
@@ -25,6 +22,6 @@ public class City {
     @JoinColumn(name = "country_id")
     private Country country;
 
-    @OneToMany(mappedBy = "city", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "city")
     private List<Customer> customers;
 }

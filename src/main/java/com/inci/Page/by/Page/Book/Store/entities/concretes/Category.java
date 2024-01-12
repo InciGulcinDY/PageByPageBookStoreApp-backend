@@ -1,6 +1,6 @@
 package com.inci.Page.by.Page.Book.Store.entities.concretes;
 
-import com.inci.Page.by.Page.Book.Store.entities.abstracts.Product;
+import com.inci.Page.by.Page.Book.Store.entities.abstracts.BasicEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,17 +13,15 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Category {
-    @Id
-    @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+public class Category extends BasicEntity {
 
     @Column(name = "category")
     private String category;
 
     @OneToMany(mappedBy = "category")
-    private List<Product> products;
+    private List<Magazine> magazines;
 
+    @OneToMany(mappedBy = "category")
+    private List<Book> books;
 
 }
