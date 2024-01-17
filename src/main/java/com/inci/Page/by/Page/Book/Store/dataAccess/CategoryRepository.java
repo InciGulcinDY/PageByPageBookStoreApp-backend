@@ -1,4 +1,4 @@
-package com.inci.Page.by.Page.Book.Store.dataAccess.concretes;
+package com.inci.Page.by.Page.Book.Store.dataAccess;
 
 import com.inci.Page.by.Page.Book.Store.entities.concretes.Category;
 import com.inci.Page.by.Page.Book.Store.services.dtos.category.response.GetAllCategoryResponse;

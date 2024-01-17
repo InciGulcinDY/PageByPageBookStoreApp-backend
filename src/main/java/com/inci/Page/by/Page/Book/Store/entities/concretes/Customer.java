@@ -33,13 +33,13 @@ public class Customer extends BasicEntity {
     @Column(name = "email")
     private String email;
 
-    @ManyToOne
-    @JoinColumn(name = "city_id")
-    private City city;
-
     @Column(name = "phone")
     private String phone;
 
     @Column(name = "password")
     private String password;
+
+    @ManyToOne
+    @JoinColumn(name = "city_id")
+    private City city;
 }

@@ -1,4 +1,4 @@
-package com.inci.Page.by.Page.Book.Store.dataAccess.concretes;
+package com.inci.Page.by.Page.Book.Store.dataAccess;
 
 import com.inci.Page.by.Page.Book.Store.entities.concretes.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;

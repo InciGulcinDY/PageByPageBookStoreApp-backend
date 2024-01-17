@@ -1,7 +1,7 @@
 package com.inci.Page.by.Page.Book.Store.services.concretes;
 
 import com.inci.Page.by.Page.Book.Store.core.utilities.mappers.ModelMapperService;
-import com.inci.Page.by.Page.Book.Store.dataAccess.concretes.AuthorRepository;
+import com.inci.Page.by.Page.Book.Store.dataAccess.AuthorRepository;
 import com.inci.Page.by.Page.Book.Store.entities.concretes.Author;
 import com.inci.Page.by.Page.Book.Store.services.abstracts.AuthorService;
 import com.inci.Page.by.Page.Book.Store.services.dtos.author.request.AddAuthorRequest;

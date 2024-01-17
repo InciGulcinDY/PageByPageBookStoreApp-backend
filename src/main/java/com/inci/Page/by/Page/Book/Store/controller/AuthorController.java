@@ -1,4 +1,4 @@
-package com.inci.Page.by.Page.Book.Store.controller.concretes;
+package com.inci.Page.by.Page.Book.Store.controller;
 
 import com.inci.Page.by.Page.Book.Store.services.abstracts.AuthorService;
 import com.inci.Page.by.Page.Book.Store.services.dtos.author.request.AddAuthorRequest;

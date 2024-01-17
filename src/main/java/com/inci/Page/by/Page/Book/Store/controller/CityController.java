@@ -1,4 +1,4 @@
-package com.inci.Page.by.Page.Book.Store.controller.concretes;
+package com.inci.Page.by.Page.Book.Store.controller;
 
 import com.inci.Page.by.Page.Book.Store.services.abstracts.CityService;
 import com.inci.Page.by.Page.Book.Store.services.dtos.city.request.AddCityRequest;

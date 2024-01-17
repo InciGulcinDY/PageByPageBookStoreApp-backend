@@ -1,7 +1,7 @@
 package com.inci.Page.by.Page.Book.Store.services.concretes;
 
 import com.inci.Page.by.Page.Book.Store.core.utilities.mappers.ModelMapperService;
-import com.inci.Page.by.Page.Book.Store.dataAccess.concretes.CityRepository;
+import com.inci.Page.by.Page.Book.Store.dataAccess.CityRepository;
 import com.inci.Page.by.Page.Book.Store.entities.concretes.City;
 import com.inci.Page.by.Page.Book.Store.services.abstracts.CityService;
 import com.inci.Page.by.Page.Book.Store.services.dtos.city.request.AddCityRequest;

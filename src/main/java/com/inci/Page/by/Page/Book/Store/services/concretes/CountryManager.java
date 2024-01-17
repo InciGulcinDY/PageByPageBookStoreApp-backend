@@ -1,7 +1,7 @@
 package com.inci.Page.by.Page.Book.Store.services.concretes;
 
 import com.inci.Page.by.Page.Book.Store.core.utilities.mappers.ModelMapperService;
-import com.inci.Page.by.Page.Book.Store.dataAccess.concretes.CountryRepository;
+import com.inci.Page.by.Page.Book.Store.dataAccess.CountryRepository;
 import com.inci.Page.by.Page.Book.Store.entities.concretes.Country;
 import com.inci.Page.by.Page.Book.Store.services.abstracts.CountryService;
 import com.inci.Page.by.Page.Book.Store.services.dtos.country.request.AddCountryRequest;
