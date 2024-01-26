@@ -6,6 +6,7 @@ import com.inci.Page.by.Page.Book.Store.services.dtos.customer.request.DeleteCus
 import com.inci.Page.by.Page.Book.Store.services.dtos.customer.request.UpdateCustomerRequest;
 import com.inci.Page.by.Page.Book.Store.services.dtos.customer.response.GetAllCustomerResponse;
 import com.inci.Page.by.Page.Book.Store.services.dtos.customer.response.GetCustomerByIdResponse;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,21 +15,22 @@ import java.util.List;
 @RestController
 @RequestMapping("api/customers")
 @AllArgsConstructor
+@CrossOrigin
 public class CustomerController {
     private final CustomerService customerService;
 
     @PostMapping
-    public void add(AddCustomerRequest request){
+    public void add(@RequestBody @Valid AddCustomerRequest request){
         customerService.add(request);
     }
 
     @PutMapping
-    public void update(UpdateCustomerRequest request){
+    public void update(@RequestBody @Valid UpdateCustomerRequest request){
         customerService.update(request);
     }
 
     @DeleteMapping
-    public void delete(DeleteCustomerRequest request){
+    public void delete(@RequestBody @Valid DeleteCustomerRequest request){
         customerService.delete(request);
     }
 
@@ -37,8 +39,8 @@ public class CustomerController {
         return customerService.getAll();
     }
 
-    @GetMapping({"id"})
-    GetCustomerByIdResponse getById(int id){
+    @GetMapping("/{id}")
+    GetCustomerByIdResponse getById(@PathVariable int id){
         return customerService.getById(id);
     }
 }

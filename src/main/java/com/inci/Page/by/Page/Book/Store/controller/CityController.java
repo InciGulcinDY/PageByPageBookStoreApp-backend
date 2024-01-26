@@ -39,7 +39,7 @@ public class CityController {
         return cityService.getAll();
     }
 
-    @GetMapping({"id"})
+    @GetMapping("/{id}")
     public GetCityByIdResponse getById(@RequestParam int id){
         return cityService.getCityById(id);
     }

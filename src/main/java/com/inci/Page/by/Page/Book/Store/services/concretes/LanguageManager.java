@@ -74,11 +74,21 @@ public class LanguageManager implements LanguageService {
 
     @Override
     public List<GetAllLanguageResponse> getAll() {
-        return null;
+
+        return languageRepository.findAll().stream()
+                .map(language -> modelMapperService.forResponse()
+                        .map(language, GetAllLanguageResponse.class)).toList();
+
     }
 
     @Override
     public GetLanguageByIdResponse getById(int id) {
-        return null;
+
+        //  Finding the relevant id!
+        Language language = languageRepository.findById(id).orElseThrow();
+
+        //  Mapping
+        return modelMapperService.forResponse().map(language, GetLanguageByIdResponse.class);
+
     }
 }

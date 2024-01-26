@@ -17,6 +17,7 @@ import java.util.List;
 @CrossOrigin
 @AllArgsConstructor
 public class CategoryController {
+
     private final CategoryService categoryService;
 
     @PostMapping
@@ -38,8 +39,8 @@ public class CategoryController {
         return categoryService.getAllCategories();
     }
 
-    @GetMapping("{id}")
-    public GetCategoryByIdResponse getById(@RequestParam int id){
+    @GetMapping("/{id}")
+    public GetCategoryByIdResponse getById(@PathVariable int id){
         return categoryService.getCategoryById(id);
     }
 }

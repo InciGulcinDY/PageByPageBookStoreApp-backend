@@ -15,20 +15,21 @@ import java.util.List;
 @RestController
 @RequestMapping("api/authors")
 @AllArgsConstructor
+@CrossOrigin
 public class AuthorController {
     private final AuthorService authorService;
 
-    @PostMapping("/add")
+    @PostMapping
     public void add(@RequestBody @Valid AddAuthorRequest request){
         authorService.add(request);
     }
 
-    @PutMapping("/update")
+    @PutMapping
     public void update(@RequestBody @Valid UpdateAuthorRequest request){
         authorService.update(request);
     }
 
-    @DeleteMapping("/delete")
+    @DeleteMapping
     public void delete(@RequestBody @Valid DeleteAuthorRequest request){
         authorService.delete(request);
     }
@@ -44,7 +45,7 @@ public class AuthorController {
     }
 
     @GetMapping("/{id}")
-    public GetAuthorByIdResponse getById(@RequestParam int id){
+    public GetAuthorByIdResponse getById(@PathVariable int id){
         return authorService.getAuthorById(id);
     }
 }

@@ -15,6 +15,7 @@ import java.util.List;
 @RestController
 @RequestMapping("api/countries")
 @AllArgsConstructor
+@CrossOrigin
 public class CountryController {
 
     private final CountryService countryService;
@@ -39,8 +40,8 @@ public class CountryController {
         return countryService.getAll();
     }
 
-    @GetMapping("{id}")
-    public GetCountryByIdResponse getById(@RequestParam @Valid int id){
+    @GetMapping("/{id}")
+    public GetCountryByIdResponse getById(@PathVariable int id){
         return countryService.getById(id);
     }
 
