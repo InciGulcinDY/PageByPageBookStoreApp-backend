@@ -48,15 +48,15 @@ public class AuthorManager implements AuthorService {
 
     @Override
     public void update(UpdateAuthorRequest request) {
+        //Converting uppercase letters to lowercase letters
+        request.setName(request.getName().toLowerCase());
+        request.setSurname(request.getSurname().toLowerCase());
+
         //Business Rule
         if (authorRepository.existsAuthorByName(request.getName()) &&
                 authorRepository.existsAuthorBySurname(request.getSurname())) {
             throw new RuntimeException("The same author cannot be registered twice!");
         }
-
-        //Converting uppercase letters to lowercase letters
-        request.setName(request.getName().toLowerCase());
-        request.setSurname(request.getSurname().toLowerCase());
 
         //Mapping
         Author author = modelMapperService.forRequest().map(request,Author.class);
@@ -69,7 +69,7 @@ public class AuthorManager implements AuthorService {
     @Override
     public void delete(DeleteAuthorRequest request) {
 
-        //Checking the existance of the author
+        //Checking the existence of the author
         authorRepository.findById(request.getId()).orElseThrow();
 
         //Delete the author
@@ -103,7 +103,7 @@ public class AuthorManager implements AuthorService {
 
     @Override
     public GetAuthorByIdResponse getAuthorById(int id) {
-        //Finding the relevant id!
+        //  Finding the relevant id!
         Author author = authorRepository.findById(id).orElseThrow();
 
         //Mapping
