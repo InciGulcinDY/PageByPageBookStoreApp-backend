@@ -5,7 +5,7 @@ import com.inci.Page.by.Page.Book.Store.core.utilities.mappers.ModelMapperServic
 import com.inci.Page.by.Page.Book.Store.core.utilities.messages.MessageService;
 import com.inci.Page.by.Page.Book.Store.core.utilities.results.Result;
 import com.inci.Page.by.Page.Book.Store.core.utilities.results.SuccessResult;
-import com.inci.Page.by.Page.Book.Store.dataAccess.AuthorRepository;
+import com.inci.Page.by.Page.Book.Store.repositories.AuthorRepository;
 import com.inci.Page.by.Page.Book.Store.entities.concretes.Author;
 import com.inci.Page.by.Page.Book.Store.services.abstracts.AuthorService;
 import com.inci.Page.by.Page.Book.Store.services.constants.Messages;
@@ -34,17 +34,17 @@ public class AuthorManager implements AuthorService {
     @Override
     public Result add(AddAuthorRequest request) {
 
-        //Converting uppercase letters to lowercase letters
+        //  Converting uppercase letters to lowercase letters
         request.setName(request.getName().toLowerCase());
         request.setSurname(request.getSurname().toLowerCase());
 
-        //Business Rule
+        //  Business Rule
         authorBusinessRule.existsAuthorByFullName(request.getName(), request.getSurname());
 
-        //Mapping
+        //  Mapping
         Author author = modelMapperService.forRequest().map(request, Author.class);
 
-        //Saving
+        //  Saving
         authorRepository.save(author);
 
         return new SuccessResult(messageService.getMessage(Messages.Author.authorAddSuccess));
@@ -53,17 +53,17 @@ public class AuthorManager implements AuthorService {
 
     @Override
     public Result update(UpdateAuthorRequest request) {
-        //Converting uppercase letters to lowercase letters
+        //  Converting uppercase letters to lowercase letters
         request.setName(request.getName().toLowerCase());
         request.setSurname(request.getSurname().toLowerCase());
 
-        //Business Rule
+        //  Business Rule
         authorBusinessRule.existsAuthorByFullName(request.getName(), request.getSurname());
 
-        //Mapping
+        //  Mapping
         Author author = modelMapperService.forRequest().map(request, Author.class);
 
-        //Saving
+        //  Saving
         authorRepository.save(author);
 
         return new SuccessResult(messageService.getMessage(Messages.Author.authorUpdateSuccess));
@@ -72,10 +72,10 @@ public class AuthorManager implements AuthorService {
     @Override
     public Result delete(DeleteAuthorRequest request) {
 
-        //Checking the existence of the author
+        //  Checking the existence of the author
         authorBusinessRule.existsAuthorById(request.getId());
 
-        //Delete the author
+        //  Delete the author
         authorRepository.deleteById(request.getId());
 
         return new SuccessResult((messageService.getMessage(Messages.Author.authorDeleteSuccess)));
@@ -100,9 +100,10 @@ public class AuthorManager implements AuthorService {
             authors = authorRepository.findByNameStartingWith(name);
         }
 
-        //Mapping
+        //  Mapping
         return authors.stream()
-                .map(author -> modelMapperService.forResponse().map(author, GetAuthorByNameResponse.class))
+                .map(author -> modelMapperService.forResponse()
+                        .map(author, GetAuthorByNameResponse.class))
                 .collect(Collectors.toList());
     }
 
@@ -112,7 +113,7 @@ public class AuthorManager implements AuthorService {
         Author author = authorRepository.findById(id).orElseThrow(() ->
                 new NotFoundException(messageService.getMessage(Messages.Author.getAuthorNotFoundMessage)));
 
-        //Mapping
+        //  Mapping
         return this.modelMapperService.forResponse().map(author, GetAuthorByIdResponse.class);
     }
 }

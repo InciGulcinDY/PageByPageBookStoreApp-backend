@@ -1,14 +1,20 @@
 package com.inci.Page.by.Page.Book.Store.services.concretes;
 
+import com.inci.Page.by.Page.Book.Store.core.exceptions.types.NotFoundException;
 import com.inci.Page.by.Page.Book.Store.core.utilities.mappers.ModelMapperService;
-import com.inci.Page.by.Page.Book.Store.dataAccess.CategoryRepository;
+import com.inci.Page.by.Page.Book.Store.core.utilities.messages.MessageService;
+import com.inci.Page.by.Page.Book.Store.core.utilities.results.Result;
+import com.inci.Page.by.Page.Book.Store.core.utilities.results.SuccessResult;
+import com.inci.Page.by.Page.Book.Store.repositories.CategoryRepository;
 import com.inci.Page.by.Page.Book.Store.entities.concretes.Category;
 import com.inci.Page.by.Page.Book.Store.services.abstracts.CategoryService;
+import com.inci.Page.by.Page.Book.Store.services.constants.Messages;
 import com.inci.Page.by.Page.Book.Store.services.dtos.category.request.AddCategoryRequest;
 import com.inci.Page.by.Page.Book.Store.services.dtos.category.request.DeleteCategoryRequest;
 import com.inci.Page.by.Page.Book.Store.services.dtos.category.request.UpdateCategoryRequest;
 import com.inci.Page.by.Page.Book.Store.services.dtos.category.response.GetAllCategoryResponse;
 import com.inci.Page.by.Page.Book.Store.services.dtos.category.response.GetCategoryByIdResponse;
+import com.inci.Page.by.Page.Book.Store.services.rules.CategoryBusinessRule;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -19,69 +25,71 @@ import java.util.List;
 public class CategoryManager implements CategoryService {
     private final CategoryRepository categoryRepository;
     private final ModelMapperService modelMapperService;
+    private final CategoryBusinessRule categoryBusinessRule;
+    private final MessageService messageService;
+
 
     @Override
-    public Category getById(int id) {
-        return categoryRepository.findById(id).orElseThrow();
-    }
-
-    @Override
-    public void add(AddCategoryRequest request) {
-        //Converting uppercase letters to lowercase letters
+    public Result add(AddCategoryRequest request) {
+        //  Converting uppercase letters to lowercase letters
         request.setCategory(request.getCategory().toLowerCase());
 
-        //Business Rules
-        if (categoryRepository.existsCategoryByCategory(request.getCategory())){
-            throw new RuntimeException();
-        }
+        //  Business Rules
+        categoryBusinessRule.existsCategoryByCategory(request.getCategory());
 
-        //Mapping
+        //  Mapping
         Category category = modelMapperService.forRequest().map(request, Category.class);
 
-        //Saving
+        //  Saving
         categoryRepository.save(category);
 
+        return new SuccessResult(messageService.getMessage(Messages.Category.categoryAddSuccess));
     }
 
     @Override
-    public void update(UpdateCategoryRequest request) {
-        //Converting uppercase letters to lowercase letters
+    public Result update(UpdateCategoryRequest request) {
+        //  Converting uppercase letters to lowercase letters
         request.setCategory(request.getCategory().toLowerCase());
 
-        //Business Rules
-        if (categoryRepository.existsCategoryByCategory(request.getCategory())){
-            throw new RuntimeException();
-        }
+        //  Business Rules
+        categoryBusinessRule.existsCategoryByCategory(request.getCategory());
 
-        //Mapping
+        //  Mapping
         Category category = modelMapperService.forRequest().map(request, Category.class);
 
-        //Saving
+        //  Saving
         categoryRepository.save(category);
+
+        return new SuccessResult(messageService.getMessage(Messages.Category.categoryUpdateSuccess));
 
     }
 
     @Override
-    public void delete(DeleteCategoryRequest request) {
-        //Checking the existance of the category
-        categoryRepository.findById(request.getId()).orElseThrow();
+    public Result delete(DeleteCategoryRequest request) {
 
-        //Delete the category
+        //  Checking the existence of the category
+        categoryBusinessRule.existsCategoryById(request.getId());
+
+        //  Delete the category
         categoryRepository.deleteById(request.getId());
 
+        return new SuccessResult(messageService.getMessage(Messages.Category.categoryDeleteSuccess));
+
     }
 
     @Override
-    public List<GetAllCategoryResponse> getAllCategories() {
+    public List<GetAllCategoryResponse> getAll() {
         return categoryRepository.getAllCategories();
     }
 
     @Override
-    public GetCategoryByIdResponse getCategoryById(int id) {
-        //Finding the relevant id!
-        Category category = categoryRepository.findById(id).orElseThrow();
+    public GetCategoryByIdResponse getById(int id) {
 
-        //Mapping
+        //  Finding the relevant id!
+        Category category = categoryRepository.findById(id).orElseThrow(() ->
+                new NotFoundException(messageService.getMessage(Messages.Category.getCategoryNotFoundMessages)));
+
+        //  Mapping
         return modelMapperService.forResponse().map(category, GetCategoryByIdResponse.class);
     }
 }

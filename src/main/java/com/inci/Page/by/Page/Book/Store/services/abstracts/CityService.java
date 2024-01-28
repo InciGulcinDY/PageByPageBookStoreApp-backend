@@ -1,5 +1,6 @@
 package com.inci.Page.by.Page.Book.Store.services.abstracts;
 
+import com.inci.Page.by.Page.Book.Store.core.utilities.results.Result;
 import com.inci.Page.by.Page.Book.Store.services.dtos.city.request.AddCityRequest;
 import com.inci.Page.by.Page.Book.Store.services.dtos.city.request.DeleteCityRequest;
 import com.inci.Page.by.Page.Book.Store.services.dtos.city.request.UpdateCityRequest;
@@ -9,9 +10,11 @@ import com.inci.Page.by.Page.Book.Store.services.dtos.city.response.GetCityByIdR
 import java.util.List;
 
 public interface CityService {
-    void add(AddCityRequest request);
-    void update(UpdateCityRequest request);
-    void delete(DeleteCityRequest request);
+    Result add(AddCityRequest request);
+    Result update(UpdateCityRequest request);
+    Result delete(DeleteCityRequest request);
+
+
     List<GetAllCitiesResponse> getAll();
-    GetCityByIdResponse getCityById(int id);
+    GetCityByIdResponse getById(int id);
 }

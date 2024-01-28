@@ -1,7 +1,7 @@
 package com.inci.Page.by.Page.Book.Store.services.concretes;
 
 import com.inci.Page.by.Page.Book.Store.core.utilities.mappers.ModelMapperService;
-import com.inci.Page.by.Page.Book.Store.dataAccess.CustomerRepository;
+import com.inci.Page.by.Page.Book.Store.repositories.CustomerRepository;
 import com.inci.Page.by.Page.Book.Store.entities.concretes.Customer;
 import com.inci.Page.by.Page.Book.Store.services.abstracts.CustomerService;
 import com.inci.Page.by.Page.Book.Store.services.dtos.customer.request.AddCustomerRequest;

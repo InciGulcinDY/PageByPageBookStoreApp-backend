@@ -1,4 +1,4 @@
-package com.inci.Page.by.Page.Book.Store.dataAccess;
+package com.inci.Page.by.Page.Book.Store.repositories;
 
 import com.inci.Page.by.Page.Book.Store.entities.concretes.Author;
 import com.inci.Page.by.Page.Book.Store.services.dtos.author.response.GetAllAuthorsResponse;

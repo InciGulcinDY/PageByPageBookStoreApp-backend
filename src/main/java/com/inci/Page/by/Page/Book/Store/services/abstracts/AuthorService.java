@@ -1,7 +1,6 @@
 package com.inci.Page.by.Page.Book.Store.services.abstracts;
 
 import com.inci.Page.by.Page.Book.Store.core.utilities.results.Result;
-import com.inci.Page.by.Page.Book.Store.entities.concretes.Author;
 import com.inci.Page.by.Page.Book.Store.services.dtos.author.request.AddAuthorRequest;
 import com.inci.Page.by.Page.Book.Store.services.dtos.author.request.DeleteAuthorRequest;
 import com.inci.Page.by.Page.Book.Store.services.dtos.author.request.UpdateAuthorRequest;

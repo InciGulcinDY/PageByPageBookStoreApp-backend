@@ -1,6 +1,6 @@
 package com.inci.Page.by.Page.Book.Store.security.config;
 
-import com.inci.Page.by.Page.Book.Store.dataAccess.UserRepository;
+import com.inci.Page.by.Page.Book.Store.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

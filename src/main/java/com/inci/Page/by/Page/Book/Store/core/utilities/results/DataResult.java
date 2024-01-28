@@ -1,7 +1,9 @@
 package com.inci.Page.by.Page.Book.Store.core.utilities.results;
 
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
 @Getter
 public class DataResult<T> extends Result {

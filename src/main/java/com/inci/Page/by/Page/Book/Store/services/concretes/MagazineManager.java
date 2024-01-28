@@ -1,14 +1,20 @@
 package com.inci.Page.by.Page.Book.Store.services.concretes;
 
+import com.inci.Page.by.Page.Book.Store.core.exceptions.types.NotFoundException;
 import com.inci.Page.by.Page.Book.Store.core.utilities.mappers.ModelMapperService;
-import com.inci.Page.by.Page.Book.Store.dataAccess.MagazineRepository;
+import com.inci.Page.by.Page.Book.Store.core.utilities.messages.MessageService;
+import com.inci.Page.by.Page.Book.Store.core.utilities.results.Result;
+import com.inci.Page.by.Page.Book.Store.core.utilities.results.SuccessResult;
+import com.inci.Page.by.Page.Book.Store.repositories.MagazineRepository;
 import com.inci.Page.by.Page.Book.Store.entities.concretes.Magazine;
 import com.inci.Page.by.Page.Book.Store.services.abstracts.MagazineService;
+import com.inci.Page.by.Page.Book.Store.services.constants.Messages;
 import com.inci.Page.by.Page.Book.Store.services.dtos.magazine.request.AddMagazineRequest;
 import com.inci.Page.by.Page.Book.Store.services.dtos.magazine.request.DeleteMagazineRequest;
 import com.inci.Page.by.Page.Book.Store.services.dtos.magazine.request.UpdateMagazineRequest;
 import com.inci.Page.by.Page.Book.Store.services.dtos.magazine.response.GetAllMagazineResponse;
 import com.inci.Page.by.Page.Book.Store.services.dtos.magazine.response.GetMagazineByIdResponse;
+import com.inci.Page.by.Page.Book.Store.services.rules.MagazineBusinessRule;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -19,51 +25,53 @@ import java.util.List;
 public class MagazineManager implements MagazineService {
     private final MagazineRepository magazineRepository;
     private final ModelMapperService modelMapperService;
+    private final MagazineBusinessRule magazineBusinessRule;
+    private final MessageService messageService;
+
     @Override
-    public void add(AddMagazineRequest request) {
+    public Result add(AddMagazineRequest request) {
         //  Converting uppercase letters to lowercase letters
         request.setTitle(request.getTitle().toLowerCase());
 
         //  Business Rules
-        if(magazineRepository.existsMagazineByTitle(request.getTitle())){
-            throw new RuntimeException();
-        }
+        magazineBusinessRule.existsMagazineByTitle(request.getTitle());
 
-        //Mapping
+        //  Mapping
         Magazine magazine = modelMapperService.forRequest().map(request, Magazine.class);
 
         //Saving
         magazineRepository.save(magazine);
+
+        return new SuccessResult(messageService.getMessage(Messages.Magazine.magazineAddSuccess));
     }
 
     @Override
-    public void update(UpdateMagazineRequest request) {
-
+    public Result update(UpdateMagazineRequest request) {
         //  Converting uppercase letters to lowercase letters
         request.setTitle(request.getTitle().toLowerCase());
 
-        //Business Rules
-        if(magazineRepository.existsMagazineByTitle(request.getTitle())){
-            throw new RuntimeException();
-        }
+        //  Business Rules
+        magazineBusinessRule.existsMagazineByTitle(request.getTitle());
 
-        //Mapping
+        //  Mapping
         Magazine magazine = modelMapperService.forRequest().map(request, Magazine.class);
 
-        //Updating
+        //Saving
         magazineRepository.save(magazine);
 
+        return new SuccessResult(messageService.getMessage(Messages.Magazine.magazineUpdateSuccess));
     }
 
     @Override
-    public void delete(DeleteMagazineRequest request) {
+    public Result delete(DeleteMagazineRequest request) {
 
-        //  Checking the existence of the author
-        magazineRepository.findById(request.getId()).orElseThrow();
+        //  Checking the existence of the magazine
+        magazineBusinessRule.existsMagazineById(request.getId());
 
         //Delete the magazine
         magazineRepository.deleteById(request.getId());
 
+        return new SuccessResult(messageService.getMessage(Messages.Magazine.magazineDeleteSuccess));
     }
 
     @Override
@@ -76,10 +84,10 @@ public class MagazineManager implements MagazineService {
     @Override
     public GetMagazineByIdResponse getById(int id) {
         //  Finding the relevant id!
-        Magazine magazine = magazineRepository.findById(id).orElseThrow();
+        Magazine magazine = magazineRepository.findById(id).orElseThrow(() ->
+                new NotFoundException(Messages.Magazine.getMagazineNotFoundMessage));
 
         //  Mapping
         return modelMapperService.forResponse().map(magazine, GetMagazineByIdResponse.class);
-
     }
 }
