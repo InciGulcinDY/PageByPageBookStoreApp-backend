@@ -15,6 +15,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/magazines")
 @AllArgsConstructor
+@CrossOrigin
 public class MagazineController {
 
     private final MagazineService magazineService;

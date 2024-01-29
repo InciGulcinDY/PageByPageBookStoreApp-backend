@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface BookRepository extends JpaRepository<Book, Integer> {
     //  Derived Query Methods
+    boolean existsBookByTitle(String title);
 
     //  JPQL Methods
 

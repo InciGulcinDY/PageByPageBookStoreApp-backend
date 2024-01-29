@@ -36,16 +36,16 @@ public class AuthorController {
 
     @GetMapping
     public List<GetAllAuthorsResponse> getAll(){
-        return authorService.getAllAuthors();
+        return authorService.getAll();
     }
 
     @GetMapping("/name")
     public List<GetAuthorByNameResponse> getByName(@RequestParam String name){
-        return authorService.getAuthorByName(name);
+        return authorService.getByName(name);
     }
 
     @GetMapping("/{id}")
     public GetAuthorByIdResponse getById(@PathVariable int id){
-        return authorService.getAuthorById(id);
+        return authorService.getById(id);
     }
 }

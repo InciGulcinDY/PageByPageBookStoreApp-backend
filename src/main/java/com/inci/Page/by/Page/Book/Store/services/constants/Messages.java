@@ -10,6 +10,14 @@ public class Messages {
 
     }
 
+    public static class Book {
+        public static String bookAddSuccess = "Book.bookAddSuccess";
+        public static String bookUpdateSuccess = "Book.bookUpdateSuccess";
+        public static String bookDeleteSuccess = "Book.bookDeleteSuccess";
+        public static String getBookTitleAlreadyExitsMessage = "Book.getBookTitleAlreadyExitsMessage";
+        public static String getBookNotFoundMessage = "Book.getBookNotFoundMessage";
+    }
+
     public static class Category{
         public static  String categoryAddSuccess = "Category.categoryAddSuccess";
         public static String categoryUpdateSuccess = "Category.categoryUpdateSuccess";

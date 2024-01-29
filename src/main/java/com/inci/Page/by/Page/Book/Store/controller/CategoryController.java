@@ -36,11 +36,11 @@ public class CategoryController {
 
     @GetMapping
     public List<GetAllCategoryResponse> getAll(){
-        return categoryService.getAllCategories();
+        return categoryService.getAll();
     }
 
     @GetMapping("/{id}")
     public GetCategoryByIdResponse getById(@PathVariable int id){
-        return categoryService.getCategoryById(id);
+        return categoryService.getById(id);
     }
 }

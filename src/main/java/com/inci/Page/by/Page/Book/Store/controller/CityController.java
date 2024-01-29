@@ -15,6 +15,7 @@ import java.util.List;
 @RestController
 @RequestMapping("api/cities")
 @AllArgsConstructor
+@CrossOrigin
 public class CityController {
 
     private final CityService cityService;
@@ -41,6 +42,6 @@ public class CityController {
 
     @GetMapping("/{id}")
     public GetCityByIdResponse getById(@RequestParam int id){
-        return cityService.getCityById(id);
+        return cityService.getById(id);
     }
 }
