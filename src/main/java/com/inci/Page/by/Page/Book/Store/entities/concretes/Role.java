@@ -1,6 +1,16 @@
 package com.inci.Page.by.Page.Book.Store.entities.concretes;
 
-public enum Role {
+import org.springframework.security.core.GrantedAuthority;
+
+public enum Role implements GrantedAuthority {
+
     USER,
-    ADMIN
+    ADMIN,
+    MODERATOR,
+    CUSTOMER;
+
+    @Override
+    public String getAuthority() {
+        return name();
+    }
 }

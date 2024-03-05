@@ -25,6 +25,9 @@ public class Book extends BasicEntity {
     @Column(name = "number_of_editions")
     private String numberOfEditions;
 
+    @Column(name = "summary")
+    private String summary;
+
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;

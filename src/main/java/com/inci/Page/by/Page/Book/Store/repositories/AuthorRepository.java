@@ -16,7 +16,7 @@ public interface AuthorRepository extends JpaRepository<Author, Integer> {
 
     //  JPQL Methods
     @Query("select new com.inci.Page.by.Page.Book.Store.services.dtos.author.response.GetAllAuthorsResponse" +
-            "(a.name, a.surname) " +
+            "(a.name, a.surname, a.quote) " +
             "from Author a")
     List<GetAllAuthorsResponse> getAllAuthors();
 }

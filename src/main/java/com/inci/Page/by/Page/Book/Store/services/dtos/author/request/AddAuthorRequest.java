@@ -22,4 +22,15 @@ public class AddAuthorRequest {
             message = "Only include letters, special characters not allowed")
     private String surname;
 
+    @NotBlank
+    @Length(max = 100)
+    @Pattern(regexp = "^[a-zA-ZçÇğĞıİöÖşŞüÜ\\s]*$",
+            message = "Only include letters, special characters not allowed")
+    private String quote;
+
+    @NotBlank
+    @Length(max = 100)
+    @Pattern(regexp = "^[a-zA-ZçÇğĞıİöÖşŞüÜ\\s]*$",
+            message = "Only include letters, special characters not allowed")
+    private String imagePath;
 }

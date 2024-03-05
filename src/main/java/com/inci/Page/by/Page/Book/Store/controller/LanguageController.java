@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/languages")
+@RequestMapping("/api/languages")
 @AllArgsConstructor
 @CrossOrigin
 public class LanguageController {
@@ -36,7 +36,7 @@ public class LanguageController {
     }
 
     @GetMapping
-    List<GetAllLanguageResponse> getAll(){
+    public List<GetAllLanguageResponse> getAll() {
         return languageService.getAll();
     }
 

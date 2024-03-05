@@ -10,6 +10,8 @@ import lombok.NoArgsConstructor;
 public class GetAuthorByNameResponse {
     private String name;
     private String surname;
+    private String quote;
+    private String imagePath;
 
     private String getFullName(String name, String surname){
         return name + " " + surname;

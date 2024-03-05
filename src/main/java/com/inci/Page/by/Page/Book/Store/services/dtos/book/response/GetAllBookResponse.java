@@ -1,5 +1,9 @@
 package com.inci.Page.by.Page.Book.Store.services.dtos.book.response;
 
+import com.inci.Page.by.Page.Book.Store.services.dtos.author.response.GetAuthorByIdResponse;
+import com.inci.Page.by.Page.Book.Store.services.dtos.category.response.GetCategoryByIdResponse;
+import com.inci.Page.by.Page.Book.Store.services.dtos.language.response.GetLanguageByIdResponse;
+import com.inci.Page.by.Page.Book.Store.services.dtos.publisher.response.GetPublisherByIdResponse;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,11 +24,13 @@ public class GetAllBookResponse {
 
     private String numberOfEditions;
 
-    private int categoryId;
+    private String summary;
 
-    private int languageId;
+    private GetCategoryByIdResponse category;
 
-    private int authorId;
+    private GetLanguageByIdResponse language;
 
-    private int publisherId;
+    private GetAuthorByIdResponse author;
+
+    private GetPublisherByIdResponse publisher;
 }

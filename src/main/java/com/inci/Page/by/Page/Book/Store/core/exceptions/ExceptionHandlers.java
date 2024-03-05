@@ -24,27 +24,21 @@ public class ExceptionHandlers {
         return new ErrorResult(exception.getMessage());
     }
 
-    // 404 not found
     @ExceptionHandler({NotFoundException.class})
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public Result handleNotFoundException(NotFoundException exception){
         return new ErrorResult(exception.getMessage());
     }
 
-
-    // TODO
-    // Result yapısı ve multi-language.
     @ExceptionHandler({MethodArgumentNotValidException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public Object handleValidationException(MethodArgumentNotValidException exception){
-        // gelen exceptiondaki validasyon hatalarını oku liste olarak kullanıcıya göster
+
         Map<String,String> errors = new HashMap<>();
 
         for(FieldError fieldError : exception.getBindingResult().getFieldErrors()){
             errors.put(fieldError.getField(), fieldError.getDefaultMessage());
         }
-        // DATA
-        // Validasyon hataları mevcut.
         return errors;
     }
 

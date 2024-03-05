@@ -22,6 +22,12 @@ public class Author extends BasicEntity {
     @Column(name = "surname")
     private String surname;
 
+    @Column(name = "quote")
+    private String quote;
+
+    @Column(name = "image_path")
+    private String imagePath;
+
     @OneToMany(mappedBy = "author")
     private List<Book> books;
 

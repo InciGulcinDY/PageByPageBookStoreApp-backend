@@ -42,6 +42,12 @@ public class UpdateBookRequest {
     @Positive(message = "The value cannot be negative!")
     private String numberOfEditions;
 
+    @NotBlank
+    @Length(max = 100)
+    @Pattern(regexp = "^[a-zA-ZçÇğĞıİöÖşŞüÜ\\s]*$",
+            message = "Only include letters, special characters not allowed")
+    private String summary;
+
     @NotNull
     @Positive(message = "The value cannot be negative!")
     private int categoryId;
